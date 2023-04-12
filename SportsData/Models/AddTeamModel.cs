@@ -5,14 +5,16 @@ namespace SportsData.Models
 {
     public class AddTeamModel
     {
-        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; } = null!;
 
         [Required]
         [DisplayName("Спорт ИД между 0 и 6")]
-        public int SportName { get; set; }
+        public string SportName { get; set; } = null!;
+
         [Required]
         [DisplayName("Треньор ИД")]
-        public int  Coach { get; set; }
+        public int Coach { get; set; }
         
         [Required]
         [DisplayName("Стадион ИД")]

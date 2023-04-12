@@ -24,8 +24,14 @@ namespace SportsData.Data
             }
         }
 
+        internal void AddStadium(Stadium stad)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Team> Teams { get; set; }   
+        public DbSet<Stadium> Stadiums { get; set; }
 
 
     }

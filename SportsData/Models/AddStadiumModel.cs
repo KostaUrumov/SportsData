@@ -5,8 +5,6 @@ namespace SportsData.Models
 {
     public class AddStadiumModel
     {
-        public int StadiumId { get; set; }
-
         [Required]
         [DisplayName("Име")]
         public string StadiumName { get; set; } = null!;

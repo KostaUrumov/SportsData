@@ -1,5 +1,5 @@
 ﻿using SportsData.Constraints;
-using SportsData.Data.Enums;
+using SportsData.Data.Enm;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +13,7 @@ namespace SportsData.Data.Models
         [MaxLength(GlobalConstraints.TeamNameMax)]
         public string? Name { get; set; }
         [Required]
-        public SportName? SportName { get; set; }
+        public SportName SportName { get; set; }
 
         [Required]
         [ForeignKey(nameof(Coach))]
