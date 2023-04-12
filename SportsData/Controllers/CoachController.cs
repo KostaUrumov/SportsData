@@ -2,7 +2,7 @@
 
 namespace SportsData.Controllers
 {
-    public class StadiumController : Controller
+    public class CoachController : Controller
     {
         public IActionResult Index()
         {
@@ -10,7 +10,7 @@ namespace SportsData.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddStadium ()
+        public IActionResult NewCoach()
         {
             return View();
         }

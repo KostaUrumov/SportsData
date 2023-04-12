@@ -8,12 +8,14 @@ namespace SportsData.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("0 till 6")]
+        [DisplayName("Спорт ИД между 0 и 6")]
         public int SportName { get; set; }
         [Required]
+        [DisplayName("Треньор ИД")]
         public int  Coach { get; set; }
         
         [Required]
+        [DisplayName("Стадион ИД")]
         public int Stadium { get; set; }
 
 
