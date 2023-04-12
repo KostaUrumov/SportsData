@@ -1,0 +1,30 @@
+﻿@model AddTeamModel
+
+<form asp-controller="Team" asp-action="Add" method="post">
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="SportName"></label>
+            <input asp-for="SportName" class="form-control" />
+            <span asp-validation-for="SportName" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="Coach"></label>
+            <input asp-for="Coach" class="form-control" />
+            <span asp-validation-for="Coach" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="Stadium"></label>
+            <input asp-for="Stadium" class="form-control" />
+            <span asp-validation-for="Stadium" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="submit" class="btn btn-success mt-2">Submit</button>
+        </div>
+    </div>
+</form>
