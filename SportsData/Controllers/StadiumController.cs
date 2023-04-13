@@ -9,9 +9,9 @@ namespace SportsData.Controllers
     public class StadiumController : Controller
     {
         private SportsDataDbContext context;
-        public StadiumController()
+        public StadiumController(SportsDataDbContext _context)
         {
-            context = new SportsDataDbContext();
+            context = _context;
         }
 
         public IActionResult Index()
@@ -34,14 +34,12 @@ namespace SportsData.Controllers
             else
             {
                 
-                Stadium stad = new Stadium();
+                var stad = new Stadium();
                 stad.Capacity = model.Capacity;
-                stad.Id = 1;
                 stad.Name = model.StadiumName;
-                context.Stadiums.Add(stad);
+                context.Stadiums.AddRange(stad);
                 
             }
-
             await context.SaveChangesAsync();
             return View();
         }

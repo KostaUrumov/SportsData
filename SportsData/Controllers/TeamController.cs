@@ -46,7 +46,7 @@ namespace SportsData.Controllers
                 context.Teams.Add(team);
             }
 
-            await context.SaveChangesAsync();
+            context.SaveChanges();
             return View();
         }
 

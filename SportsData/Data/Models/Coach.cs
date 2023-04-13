@@ -1,10 +1,12 @@
-﻿using SportsData.Constraints;
+﻿using Microsoft.EntityFrameworkCore;
+using SportsData.Constraints;
 using System.ComponentModel.DataAnnotations;
 
 namespace SportsData.Data.Models
 {
     public class Coach
     {
+        
         public int Id { get; set; }
 
         [Required]
