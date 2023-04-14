@@ -6,7 +6,7 @@ namespace SportsData.Data.Models
 {
     public class Coach
     {
-        
+        [Key]
         public int Id { get; set; }
 
         [Required]

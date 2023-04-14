@@ -35,30 +35,37 @@ namespace SportsData.Controllers
             }
             else
             {
-                SportName name;   
+                SportName name;
                 bool isGood = Enum.TryParse(model.Name, out name);
                 var team = new Team();
                 team.SportName = name;
                 team.Name = model.Name;
                 team.CoachID = model.Coach;
                 team.StadiumID = model.Stadium;
+
                 context.Teams.Add(team);
             }
 
-<<<<<<< HEAD
+
             await context.SaveChangesAsync();
-            return RedirectToAction("AllTeams");
+            return View();
         }
 
         public IActionResult AllTeams()
         {
             List<Team> list = context.Teams.ToList();
+            foreach (var mar in list)
+            {
+                mar.Coach = context.Coaches.FirstOrDefault(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.FirstOrDefault(s => s.Id == mar.StadiumID);
 
+            }
+            if (list == null)
+            {
+                RedirectToAction("AddTeam");
+            }
             return View(list);
-=======
-            context.SaveChanges();
-            return View();
->>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
+
         }
 
 

@@ -5,6 +5,7 @@ namespace SportsData.Data.Models
 {
     public class Stadium
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
