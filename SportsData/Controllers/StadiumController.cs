@@ -39,9 +39,15 @@ namespace SportsData.Controllers
                 stad.Name = model.StadiumName;
                 context.Stadiums.AddRange(stad);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 
             }
             await context.SaveChangesAsync();
+=======
+                context.SaveChanges();
+                
+            }
+>>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
 =======
                 context.SaveChanges();
                 

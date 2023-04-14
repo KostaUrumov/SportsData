@@ -45,6 +45,7 @@ namespace SportsData.Controllers
                 context.Teams.Add(team);
             }
 
+<<<<<<< HEAD
             await context.SaveChangesAsync();
             return RedirectToAction("AllTeams");
         }
@@ -54,6 +55,10 @@ namespace SportsData.Controllers
             List<Team> list = context.Teams.ToList();
 
             return View(list);
+=======
+            context.SaveChanges();
+            return View();
+>>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
         }
 
 
