@@ -37,22 +37,10 @@ namespace SportsData.Controllers
                 var stad = new Stadium();
                 stad.Capacity = model.Capacity;
                 stad.Name = model.StadiumName;
-                context.Stadiums.AddRange(stad);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                
+                context.Stadiums.AddRange(stad);          
             }
-            await context.SaveChangesAsync();
-=======
-                context.SaveChanges();
-                
-            }
->>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
-=======
-                context.SaveChanges();
-                
-            }
->>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
+            context.SaveChangesAsync();
+           
             return View();
         }
     }
