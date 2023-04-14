@@ -29,7 +29,7 @@ namespace SportsData.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTeam(AddTeamModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return RedirectToAction("AddTeam");
             }
@@ -37,17 +37,23 @@ namespace SportsData.Controllers
             {
                 SportName name;   
                 bool isGood = Enum.TryParse(model.Name, out name);
-                Team team = new Team();
+                var team = new Team();
                 team.SportName = name;
                 team.Name = model.Name;
                 team.CoachID = model.Coach;
                 team.StadiumID = model.Stadium;
-                team.Id = context.Teams.Count() + 1;
                 context.Teams.Add(team);
             }
 
-            context.SaveChanges();
-            return View();
+            await context.SaveChangesAsync();
+            return RedirectToAction("AllTeams");
+        }
+
+        public IActionResult AllTeams()
+        {
+            List<Team> list = context.Teams.ToList();
+
+            return View(list);
         }
 
 

@@ -41,7 +41,14 @@ namespace SportsData.Controllers
 
             }
             await context.SaveChangesAsync();
-            return RedirectToAction("NewCoach");
+            return RedirectToAction("AllCoaches");
+        }
+
+        public  IActionResult AllCoaches()
+        {
+            List<Coach> list = context.Coaches.ToList();
+
+            return View(list);
         }
     }
 }

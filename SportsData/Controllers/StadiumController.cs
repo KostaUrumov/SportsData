@@ -25,7 +25,7 @@ namespace SportsData.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddStadium(AddStadiumModel model)
+        public IActionResult AddStadium(AddStadiumModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -38,9 +38,15 @@ namespace SportsData.Controllers
                 stad.Capacity = model.Capacity;
                 stad.Name = model.StadiumName;
                 context.Stadiums.AddRange(stad);
+<<<<<<< HEAD
                 
             }
             await context.SaveChangesAsync();
+=======
+                context.SaveChanges();
+                
+            }
+>>>>>>> 9bfb21c6f249ec9cc0a74ad3e083681ac206e7d8
             return View();
         }
     }
