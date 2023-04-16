@@ -48,7 +48,7 @@ namespace SportsData.Controllers
 
 
             await context.SaveChangesAsync();
-            return View();
+            return View("AllTeams");
         }
 
         public IActionResult AllTeams()
@@ -58,17 +58,12 @@ namespace SportsData.Controllers
             {
                 mar.Coach = context.Coaches.FirstOrDefault(c => c.Id == mar.CoachID);
                 mar.Stadium = context.Stadiums.FirstOrDefault(s => s.Id == mar.StadiumID);
-
-<<<<<<< HEAD
             }
             if (list == null)
             {
                 RedirectToAction("AddTeam");
             }
-=======
 
-
->>>>>>> cc1ffaf96913be9c35fb55b2e21ba5505fc0a308
             return View(list);
 
         }

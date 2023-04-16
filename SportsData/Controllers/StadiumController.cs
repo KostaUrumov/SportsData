@@ -43,5 +43,13 @@ namespace SportsData.Controllers
            
             return View();
         }
+
+        public IActionResult AllStadiums()
+        {
+            List<Stadium> list = context.Stadiums.ToList();
+
+            return View(list);
+
+        }
     }
 }
