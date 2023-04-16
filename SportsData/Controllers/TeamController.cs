@@ -26,6 +26,12 @@ namespace SportsData.Controllers
             return View();
         }
 
+        public IActionResult TeamIsAlreadyIn()
+        {
+            ViewBag.Message = "Team Is already there";
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddTeam(AddTeamModel model)
         {
@@ -36,7 +42,15 @@ namespace SportsData.Controllers
             else
             {
                 SportName name;
-                bool isGood = Enum.TryParse(model.Name, out name);
+                bool isGood = Enum.TryParse(model.SportName, out name);
+                var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
+
+                if (teamIsThere != null)
+                {
+                    
+                    return RedirectToAction("TeamIsAlreadyIn");
+                }
+
                 var team = new Team();
                 team.SportName = name;
                 team.Name = model.Name;
