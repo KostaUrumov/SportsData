@@ -23,5 +23,7 @@ namespace SportsData.Data.Models
         [MinLength(GlobalConstraints.CoachAgeMin)]
         [MaxLength(GlobalConstraints.CoachAgeMax)]
         public int Age { get; set; }
+
+        public bool isHired { get; set; }
     }
 }

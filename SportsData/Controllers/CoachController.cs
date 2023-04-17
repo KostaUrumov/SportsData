@@ -38,7 +38,7 @@ namespace SportsData.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("AddStadium");
+                return RedirectToAction("AddCoach");
             }
 
             var coachIsIn = context.Coaches.FirstOrDefault(t => t.FirstName == model.FirtsName && t.LastName == model.LastName && t.Age == model.Age);
@@ -49,14 +49,12 @@ namespace SportsData.Controllers
                 return RedirectToAction("CoachIsAlreadyIn");
             }
 
-
             else
             {
                 service.AddModelToDb(model);
 
                 return RedirectToAction("AllCoaches");
             }
-            ;
         }
 
         public  IActionResult AllCoaches()

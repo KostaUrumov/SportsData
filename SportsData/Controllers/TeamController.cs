@@ -10,10 +10,13 @@ namespace SportsData.Controllers
     public class TeamController : Controller
     {
         private readonly SportsDataDbContext context;
-        public TeamController()
+        private readonly TeamService teamService;
+        private readonly CoachService coach;
+        public TeamController(TeamService _teamService, SportsDataDbContext _cont, CoachService _coach)
         {
-            context = new SportsDataDbContext();
-
+            context = _cont;
+            teamService = _teamService;
+            coach = _coach;
         }
         public IActionResult Index()
         {
@@ -47,7 +50,9 @@ namespace SportsData.Controllers
             {
                 return RedirectToAction("AddTeam");
             }
+
             var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
+            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
 
             if (teamIsThere != null)
             {
@@ -55,15 +60,11 @@ namespace SportsData.Controllers
                 return RedirectToAction("TeamIsAlreadyIn");
             }
 
-            var team = new Team();
-            team.SportName = name;
-            team.Name = model.Name;
-            team.CoachID = model.Coach;
-            team.StadiumID = model.Stadium;
+            teamService.AddModelToDb(model);
 
-            context.Teams.Add(team);
+            coach.HireCoach(coh);
 
-            context.SaveChangesAsync();
+
             return RedirectToAction("AllTeams");
         }
 

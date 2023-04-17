@@ -24,5 +24,11 @@ namespace SportsData.Services
             context.SaveChanges();
         }
 
+        public void HireCoach(Coach coach)
+        {
+            coach.isHired = true;
+            context.SaveChanges();
+        }
+
     }
 }

@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SportsDataDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("defaultconnect")));
 builder.Services.AddScoped<CoachService>();
+builder.Services.AddScoped<TeamService>();
 
 
 var app = builder.Build();
