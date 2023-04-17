@@ -15,6 +15,5 @@ namespace SportsData.Data.Models
         [Required]
         [MaxLength(GlobalConstraints.StadiumCapacityMax)]
         public int Capacity { get; set; }
-
     }
 }

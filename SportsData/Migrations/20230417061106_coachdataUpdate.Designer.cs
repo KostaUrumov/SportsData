@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsData.Data;
 
@@ -10,9 +11,11 @@ using SportsData.Data;
 namespace SportsData.Migrations
 {
     [DbContext(typeof(SportsDataDbContext))]
-    partial class SportsDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230417061106_coachdataUpdate")]
+    partial class coachdataUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +110,7 @@ namespace SportsData.Migrations
             modelBuilder.Entity("SportsData.Data.Models.Team", b =>
                 {
                     b.HasOne("SportsData.Data.Models.Coach", "Coach")
-                        .WithMany()
+                        .WithMany("TeamsManaged")
                         .HasForeignKey("CoachID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -121,6 +124,11 @@ namespace SportsData.Migrations
                     b.Navigation("Coach");
 
                     b.Navigation("Stadium");
+                });
+
+            modelBuilder.Entity("SportsData.Data.Models.Coach", b =>
+                {
+                    b.Navigation("TeamsManaged");
                 });
 #pragma warning restore 612, 618
         }

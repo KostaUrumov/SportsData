@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportsData.Constraints;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace SportsData.Data.Models
 {

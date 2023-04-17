@@ -28,7 +28,7 @@ namespace SportsData.Controllers
 
         public IActionResult TeamIsAlreadyIn()
         {
-            ViewBag.Message = "Team Is already there";
+            ViewBag.Message = "Team Is already listed";
             return View();
         }
 
@@ -68,16 +68,15 @@ namespace SportsData.Controllers
         public IActionResult AllTeams()
         {
             List<Team> list = context.Teams.ToList();
+            if (list == null)
+            {
+                RedirectToAction("AddTeam");
+            }
             foreach (var mar in list)
             {
                 mar.Coach = context.Coaches.FirstOrDefault(c => c.Id == mar.CoachID);
                 mar.Stadium = context.Stadiums.FirstOrDefault(s => s.Id == mar.StadiumID);
             }
-            if (list == null)
-            {
-                RedirectToAction("AddTeam");
-            }
-
             return View(list);
 
         }

@@ -31,6 +31,14 @@ namespace SportsData.Controllers
             {
                 return RedirectToAction("AddStadium");
             }
+            var coachIsIn = context.Stadiums.FirstOrDefault(s=> s.Name == model.StadiumName);
+
+
+            if (coachIsIn != null)
+            {
+
+                return RedirectToAction("StadiumIsAlreadyIn");
+            }
             else
             {
                 
@@ -49,7 +57,12 @@ namespace SportsData.Controllers
             List<Stadium> list = context.Stadiums.ToList();
 
             return View(list);
+        }
 
+        public IActionResult StadiumIsAlreadyIn()
+        {
+            ViewBag.Message = "Stadium Is already Listed";
+            return View();
         }
     }
 }
