@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SportsData.Data;
+using SportsData.Services;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SportsDataDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("defaultconnect")));
+builder.Services.AddScoped<CoachService>();
+
 
 var app = builder.Build();
 

@@ -13,7 +13,7 @@ namespace SportsData.Controllers
         public TeamController()
         {
             context = new SportsDataDbContext();
-            
+
         }
         public IActionResult Index()
         {
@@ -33,36 +33,38 @@ namespace SportsData.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTeam(AddTeamModel model)
+        public IActionResult AddTeam(AddTeamModel model)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("AddTeam");
             }
-            else
+
+            
+            SportName name;
+            bool isGood = Enum.TryParse(model.SportName, out name);
+            if (isGood == false)
             {
-                SportName name;
-                bool isGood = Enum.TryParse(model.SportName, out name);
-                var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
+                return RedirectToAction("AddTeam");
+            }
+            var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
 
-                if (teamIsThere != null)
-                {
-                    
-                    return RedirectToAction("TeamIsAlreadyIn");
-                }
+            if (teamIsThere != null)
+            {
 
-                var team = new Team();
-                team.SportName = name;
-                team.Name = model.Name;
-                team.CoachID = model.Coach;
-                team.StadiumID = model.Stadium;
-
-                context.Teams.Add(team);
+                return RedirectToAction("TeamIsAlreadyIn");
             }
 
+            var team = new Team();
+            team.SportName = name;
+            team.Name = model.Name;
+            team.CoachID = model.Coach;
+            team.StadiumID = model.Stadium;
 
-            await context.SaveChangesAsync();
-            return View("AllTeams");
+            context.Teams.Add(team);
+
+            context.SaveChangesAsync();
+            return RedirectToAction("AllTeams");
         }
 
         public IActionResult AllTeams()

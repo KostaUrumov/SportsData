@@ -1,22 +1,32 @@
 ﻿@using SportsData.Data.Models;
 @model List<Team>
 
+
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
 <table class="table">
     <thead>
-        
+    <th scope="col">Number</th>
+    <th scope="col">Team Name</th>
+    <th scope="col">Sport</th>
+    <th scope="col">Stadium</th>
+    <th scope="col">Coach</th>
+    </thead>
+    <thead>
         @for (int i = 0; i < Model.Count(); i++)
         {
             int line = i + 1;
+            string coachName = @Model[i].Coach.FirstName + " " + @Model[i].Coach.LastName;
             <tr>
+
 
                 <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].SportName</th>
                 <th scope="col">@Model[i].Stadium.Name</th>
-                <th scope="col">@Model[i].Coach.FirstName + @Model[i].Coach.LastName</th>
+                <th scope="col">@coachName</th>
             </tr>
         }
     </thead>
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
 </table>
