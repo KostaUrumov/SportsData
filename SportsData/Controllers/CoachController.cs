@@ -38,7 +38,8 @@ namespace SportsData.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("AddCoach");
+                ViewBag.message = "Invalid required data";
+                return RedirectToAction("NewCoach");
             }
 
             var coachIsIn = context.Coaches.FirstOrDefault(t => t.FirstName == model.FirtsName && t.LastName == model.LastName && t.Age == model.Age);

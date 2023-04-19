@@ -5,7 +5,7 @@
 namespace SportsData.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class boolAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,8 @@ namespace SportsData.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Age = table.Column<int>(type: "int", maxLength: 80, nullable: false)
+                    Age = table.Column<int>(type: "int", maxLength: 80, nullable: false),
+                    isHired = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,7 +27,7 @@ namespace SportsData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stadium",
+                name: "Stadiums",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -36,7 +37,7 @@ namespace SportsData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stadium", x => x.Id);
+                    table.PrimaryKey("PK_Stadiums", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,9 +61,9 @@ namespace SportsData.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Teams_Stadium_StadiumID",
+                        name: "FK_Teams_Stadiums_StadiumID",
                         column: x => x.StadiumID,
-                        principalTable: "Stadium",
+                        principalTable: "Stadiums",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -88,7 +89,7 @@ namespace SportsData.Migrations
                 name: "Coaches");
 
             migrationBuilder.DropTable(
-                name: "Stadium");
+                name: "Stadiums");
         }
     }
 }

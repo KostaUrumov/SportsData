@@ -11,8 +11,8 @@ using SportsData.Data;
 namespace SportsData.Migrations
 {
     [DbContext(typeof(SportsDataDbContext))]
-    [Migration("20230417061106_coachdataUpdate")]
-    partial class coachdataUpdate
+    [Migration("20230419120756_boolAdded")]
+    partial class boolAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,13 +41,13 @@ namespace SportsData.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<bool>("IsHired")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<bool>("isHired")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -110,7 +110,7 @@ namespace SportsData.Migrations
             modelBuilder.Entity("SportsData.Data.Models.Team", b =>
                 {
                     b.HasOne("SportsData.Data.Models.Coach", "Coach")
-                        .WithMany("TeamsManaged")
+                        .WithMany()
                         .HasForeignKey("CoachID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -124,11 +124,6 @@ namespace SportsData.Migrations
                     b.Navigation("Coach");
 
                     b.Navigation("Stadium");
-                });
-
-            modelBuilder.Entity("SportsData.Data.Models.Coach", b =>
-                {
-                    b.Navigation("TeamsManaged");
                 });
 #pragma warning restore 612, 618
         }
