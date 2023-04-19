@@ -1,6 +1,12 @@
 ﻿@using SportsData.Data.Models;
 @model List<Coach>
 
+
+<div class="text-center">
+    <img src=@Url.Content("https://cdn.iconscout.com/icon/premium/png-256-thumb/football-coach-1653701-1400018.png") />
+</div>
+
+
 <table class="table">
     <thead>
         @for (int i = 0; i < Model.Count(); i++)
