@@ -7,6 +7,21 @@
 </div>
 
 
+<div class="text center">
+    <div class="row">
+        <div class="col-sm">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="NewCoach">Add new Coach</a>
+        </div>
+        <div class="col-sm">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="CoachesWIthoutTeam">Free Coaches</a>
+        </div>
+        <div class="col-sm">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="HiredCoaches">Free Coaches</a>
+        </div>
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         @for (int i = 0; i < Model.Count(); i++)
@@ -23,7 +38,6 @@
                 
             }
             <tr>
-
                 <th scope="col">#@line</th>
                 <th scope="col">@Model[i].FirstName</th>
                 <th scope="col">@Model[i].LastName</th>
@@ -34,6 +48,4 @@
         }
     </thead>
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="NewCoach">Add new Coach</a>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="CoachesWIthoutTeam">Free Coaches</a>
 </table>

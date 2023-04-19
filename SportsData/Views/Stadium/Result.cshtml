@@ -1,9 +1,6 @@
 ﻿@using SportsData.Data.Models;
 @model List<Stadium>
 
-<div class="text-center">
-    <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbZuhj1_ZIJ5Yw51AEf8_3IcFMYyhfsnI5fJMQXldMg&s") />
-</div>
 
 <table class="table">
     <thead>
@@ -16,5 +13,5 @@
                 <th scope="col">@Model[i].Capacity</th>
             </tr>
         }
-    </thead>  
+    </thead>
 </table>

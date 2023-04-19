@@ -1,0 +1,18 @@
+﻿@using SportsData.Data.Models;
+@model List<Coach>
+
+<table class="table">
+    <thead>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            int line = i + 1;
+            <tr>
+
+                <th scope="col">#@line</th>
+                <th scope="col">@Model[i].FirstName</th>
+                <th scope="col">@Model[i].LastName</th>
+                <th scope="col">@Model[i].Age</th>
+            </tr>
+        }
+    </thead>
+</table>
