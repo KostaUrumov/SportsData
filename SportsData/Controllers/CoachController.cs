@@ -64,5 +64,16 @@ namespace SportsData.Controllers
 
             return View(list);
         }
+
+        public IActionResult CoachesWithoutTeam()
+        {
+            var freeCoaches = context.Coaches
+                .Where(c => c.isHired == false)
+                .OrderByDescending(c=>c.FirstName)
+                .ThenByDescending(c=>c.LastName)
+                .ToList();
+
+            return View(freeCoaches);
+        }
     }
 }

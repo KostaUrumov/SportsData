@@ -49,7 +49,7 @@ namespace SportsData.Controllers
             }
             context.SaveChangesAsync();
            
-            return View();
+            return RedirectToAction("AllStadiums");
         }
 
         public IActionResult AllStadiums()
