@@ -7,7 +7,7 @@
 </div>
 
 <a class="table table-hover" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
-<table class="table-active">
+<table class="table">
     <thead>
     <th scope="col">Number</th>
     <th scope="col">Team Name</th>
@@ -20,7 +20,7 @@
         {
             int line = i + 1;
             string coachName = @Model[i].Coach.FirstName + " " + @Model[i].Coach.LastName;
-            <tr class="table-active">
+            <tr class="table">
                 <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].SportName</th>

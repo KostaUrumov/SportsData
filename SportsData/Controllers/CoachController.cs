@@ -58,7 +58,7 @@ namespace SportsData.Controllers
             }
         }
 
-        public  IActionResult AllCoaches()
+        public IActionResult AllCoaches()
         {
             List<Coach> list = context.Coaches.ToList();
 
