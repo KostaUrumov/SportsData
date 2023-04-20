@@ -1,4 +1,7 @@
-﻿@model AddTeamModel
+﻿@using SportsData.Data.Enm;
+@model AddTeamModel
+
+
 
 <form asp-controller="Team" asp-action="AddTeam" method="post">
     <div class="row">
@@ -18,6 +21,7 @@
     <div class="row">
         <div class="col-6">
             <label asp-for="Coach"></label>
+            <div class="p-3 mb-2 bg-danger text-white">
             <input asp-for="Coach" class="form-control" />
             <span asp-validation-for="Coach" class="small text-danger"></span>
         </div>

@@ -6,8 +6,8 @@
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8CEtlJ-aFL_qjupYF2yqDFHNir2S6xaEOapE971YJg&s") />
 </div>
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
-<table class="table">
+<a class="table table-hover" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
+<table class="table-active">
     <thead>
     <th scope="col">Number</th>
     <th scope="col">Team Name</th>
@@ -20,7 +20,7 @@
         {
             int line = i + 1;
             string coachName = @Model[i].Coach.FirstName + " " + @Model[i].Coach.LastName;
-            <tr>
+            <tr class="table-active">
                 <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].SportName</th>

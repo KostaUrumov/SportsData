@@ -5,6 +5,14 @@
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbZuhj1_ZIJ5Yw51AEf8_3IcFMYyhfsnI5fJMQXldMg&s") />
 </div>
 
+
+<div class="row">
+    <div class="col-sm">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium</a>
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         @for (int i = 0; i < Model.Count(); i++)
@@ -16,5 +24,5 @@
                 <th scope="col">@Model[i].Capacity</th>
             </tr>
         }
-    </thead>  
+    </thead>
 </table>
