@@ -97,16 +97,11 @@ namespace SportsData.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit()
         {
-            Team teamFind = context.Teams.First(x => x.Id == id);
-            AddTeamModel model = new AddTeamModel();
-            model.Name = teamFind.Name;
-            model.Stadium = teamFind.StadiumID;
-            model.Coach = teamFind.CoachID;
-            model.SportName = teamFind.SportName.ToString();
+            
 
-            return View(model);
+            return View();
         }
 
         [HttpPost]
