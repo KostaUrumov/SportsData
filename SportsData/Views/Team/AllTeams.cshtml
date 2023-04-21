@@ -36,7 +36,7 @@
                     </form>
                 </th>
                 <th scope="col">
-                    <form class="mt-2" asp-controller="Team" asp-action="Edit" asp-route-id="@Model[i].Id">
+                    <form class="mt-2" asp-controller="Team" asp-action="Edit" method = "get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
                             <input type="Submit" value="Edit" class="btn btn-danger mb-2"/>
                         </div>

@@ -103,8 +103,8 @@ namespace SportsData.Controllers
         
         public IActionResult Edit(int id)
         {
-
-            return View(id);
+            var findTeam = context.Teams.First(x => x.Id == id);
+            return View(findTeam);
         }
 
         [HttpPost]
