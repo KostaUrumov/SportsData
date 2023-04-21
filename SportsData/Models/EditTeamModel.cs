@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace SportsData.Models
 {
-    public class AddTeamModel
+    public class EditTeamModel
     {
         [Required]
         public string Name { get; set; } = null!;
@@ -15,11 +15,9 @@ namespace SportsData.Models
         [Required]
         [DisplayName("Треньор ИД")]
         public int Coach { get; set; }
-        
+
         [Required]
         [DisplayName("Стадион ИД")]
         public int Stadium { get; set; }
-
-
     }
 }

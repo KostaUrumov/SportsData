@@ -1,0 +1,45 @@
+﻿@using SportsData.Data.Enm;
+@model AddTeamModel
+
+
+
+<form asp-controller="Team" asp-action="AddTeam" method="post">
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="SportName"></label>
+            <input asp-for="SportName" class="form-control" />
+            <span asp-validation-for="SportName" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="Coach"></label>
+            <div class="p-3 mb-2 bg-danger text-white">
+                <input asp-for="Coach" class="form-control" />
+                <span asp-validation-for="Coach" class="small text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Stadium"></label>
+                <div class="p-3 mb-2 bg-danger text-white">
+                    <input asp-for="Stadium" class="form-control" />
+                </div>
+                <span asp-validation-for="Stadium" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-success mt-2">Submit</button>
+            </div>
+        </div>
+</form>
+

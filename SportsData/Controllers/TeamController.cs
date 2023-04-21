@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SportsData.Data;
 using SportsData.Data.Enm;
 using SportsData.Data.Models;
@@ -83,6 +85,59 @@ namespace SportsData.Controllers
             return View(list);
 
         }
+
+
+        public IActionResult Delete(int id)
+        {
+            var findTeam = context.Teams.FirstOrDefault(x => x.Id == id);
+            context.Teams.Remove(findTeam);
+            context.SaveChanges();
+
+            return RedirectToAction("AllTeams");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Team teamFind = context.Teams.First(x => x.Id == id);
+            AddTeamModel model = new AddTeamModel();
+            model.Name = teamFind.Name;
+            model.Stadium = teamFind.StadiumID;
+            model.Coach = teamFind.CoachID;
+            model.SportName = teamFind.SportName.ToString();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddTeamModel model)
+        {
+            SportName name;
+            bool isGood = Enum.TryParse(model.SportName, out name);
+            if (isGood == false)
+            {
+                return RedirectToAction("AddTeam");
+            }
+
+            var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
+            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
+
+            if (teamIsThere != null)
+            {
+
+                return RedirectToAction("TeamIsAlreadyIn");
+            }
+
+            teamService.AddModelToDb(model);
+
+            coach.HireCoach(coh);
+
+            return RedirectToAction("AllTeams");
+        }
+
+
+
+
 
 
     }
