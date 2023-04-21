@@ -6,6 +6,8 @@ using SportsData.Data.Enm;
 using SportsData.Data.Models;
 using SportsData.Models;
 using SportsData.Services;
+using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SportsData.Controllers
 {
@@ -40,12 +42,14 @@ namespace SportsData.Controllers
         [HttpPost]
         public IActionResult AddTeam(AddTeamModel model)
         {
+            
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("AddTeam");
             }
 
-            
+
             SportName name;
             bool isGood = Enum.TryParse(model.SportName, out name);
             if (isGood == false)
@@ -96,48 +100,22 @@ namespace SportsData.Controllers
             return RedirectToAction("AllTeams");
         }
 
-        [HttpGet]
+        
         public IActionResult Edit(int id)
         {
-            Team teamFind = context.Teams.First(x => x.Id == id);
-            AddTeamModel model = new AddTeamModel();
-            model.Name = teamFind.Name;
-            model.Stadium = teamFind.StadiumID;
-            model.Coach = teamFind.CoachID;
-            model.SportName = teamFind.SportName.ToString();
 
-            return View(model);
+            return View(id);
         }
 
         [HttpPost]
-        public IActionResult Edit(AddTeamModel model)
+        public IActionResult Edit(Team team, int id)
         {
-            SportName name;
-            bool isGood = Enum.TryParse(model.SportName, out name);
-            if (isGood == false)
-            {
-                return RedirectToAction("AddTeam");
-            }
+            var findTeam = context.Teams.First(x => x.Id == id);
+            findTeam.Name = team.Name;
+            context.SaveChanges();
 
-            var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
-            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
-
-            if (teamIsThere != null)
-            {
-
-                return RedirectToAction("TeamIsAlreadyIn");
-            }
-
-            teamService.AddModelToDb(model);
-
-            coach.HireCoach(coh);
-
-            return RedirectToAction("AllTeams");
+            return RedirectToAction("Allteams");
         }
-
-
-
-
 
 
     }

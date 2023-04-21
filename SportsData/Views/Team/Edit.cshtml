@@ -1,9 +1,11 @@
-﻿@using SportsData.Data.Enm;
-@model AddTeamModel
+﻿@using SportsData.Data.Models;
+@model Team
+@{
+    ViewBag.Title = "Here you will edit a team";
+}
 
 
-
-<form asp-controller="Team" asp-action="AddTeam" method="post">
+<form asp-controller="Team" asp-action="Edit" method="post">
     <div class="row">
         <div class="col-6">
             <label asp-for="Name"></label>
