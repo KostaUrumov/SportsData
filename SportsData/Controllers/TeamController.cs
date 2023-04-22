@@ -99,34 +99,21 @@ namespace SportsData.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            
-
             return View();
         }
 
         [HttpPost]
-        public IActionResult Edit(AddTeamModel model)
+        public IActionResult Edit(AddTeamModel model, int id)
         {
-            SportName name;
-            bool isGood = Enum.TryParse(model.SportName, out name);
-            if (isGood == false)
-            {
-                return RedirectToAction("AddTeam");
-            }
-
-            var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
+            var teamIsThere = context.Teams.FirstOrDefault(t => t.Id == id);
             var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
+            var stad = context.Stadiums.First(s => s.Id == model.Stadium);
 
-            if (teamIsThere != null)
-            {
-
-                return RedirectToAction("TeamIsAlreadyIn");
-            }
-
-            teamService.AddModelToDb(model);
-
+            teamIsThere.Name = model.Name;
+            teamIsThere.Stadium = stad;
+            teamIsThere.Coach = coh;
             coach.HireCoach(coh);
-
+            context.SaveChanges();
             return RedirectToAction("AllTeams");
         }
 

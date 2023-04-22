@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-sm">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium </a>
     </div>
 </div>
 
@@ -22,6 +22,20 @@
                 <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].Capacity</th>
+                <th scope="col">
+                    <form class="mt-2" asp-controller="Stadium" asp-action="Delete" asp-route-id="@Model[i].Id">
+                        <div class="d-grid gap-2">
+                            <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form class="mt-2" asp-controller="Stadium" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
+                        <div class="d-grid gap-2">
+                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                </th>
             </tr>
         }
     </thead>

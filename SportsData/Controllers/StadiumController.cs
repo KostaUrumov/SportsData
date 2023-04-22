@@ -64,5 +64,36 @@ namespace SportsData.Controllers
             ViewBag.Message = "Stadium Is already Listed";
             return View();
         }
+
+        public IActionResult Delete(int Id)
+        {
+            var stadium = context.Stadiums.First(s => s.Id == Id);
+            context.Stadiums.Remove(stadium);
+            context.SaveChanges();
+            return RedirectToAction("AllStadiums");
+        }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddStadiumModel model, int Id)
+        {
+            var stadFind = context.Stadiums.FirstOrDefault(s => s.Id == Id);
+            if (stadFind == null)
+            {
+                return RedirectToAction("AllStadiums");
+            }
+            stadFind.Name = model.StadiumName;
+            stadFind.Capacity = model.Capacity;
+            context.SaveChanges();
+            return RedirectToAction("AllStadiums");
+        }
+
+
+
     }
 }

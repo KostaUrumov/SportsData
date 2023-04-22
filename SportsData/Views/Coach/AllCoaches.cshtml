@@ -42,6 +42,20 @@
                 <th scope="col">@Model[i].LastName</th>
                 <th scope="col">@Model[i].Age</th>
                 <th scope="col">@hire</th>
+                <th scope="col">
+                    <form class="mt-2" asp-controller="Coach" asp-action="Delete" asp-route-id="@Model[i].Id">
+                        <div class="d-grid gap-2">
+                            <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form class="mt-2" asp-controller="Coach" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
+                        <div class="d-grid gap-2">
+                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                </th>
 
             </tr>
         }

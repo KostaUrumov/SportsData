@@ -86,5 +86,23 @@ namespace SportsData.Controllers
 
             return View(hired);
         }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddCoachModel model, int id)
+        {
+            var findCoach = context.Coaches.First(x => x.Id == id);
+            findCoach.FirstName = model.FirtsName;
+            findCoach.LastName = model.LastName;
+            findCoach.Age = model.Age;
+            return RedirectToAction("AllCoaches");
+        }
+
+
     }
 }
