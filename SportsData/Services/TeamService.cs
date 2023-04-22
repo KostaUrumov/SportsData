@@ -22,9 +22,21 @@ namespace SportsData.Services
             team.Name = model.Name;
             team.CoachID = model.Coach;
             team.StadiumID = model.Stadium;
-
+            
 
             context.Teams.AddRange(team);
+            context.SaveChanges();
+        }
+
+        public void ReplaceModel(int id, AddTeamModel model)
+        {
+            
+            var findTeam = context.Teams.First(x => x.Id == id);
+            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
+            var stad = context.Stadiums.First(s => s.Id == model.Stadium);
+            findTeam.Name = model.Name;
+            findTeam.Coach = coh;
+            findTeam.Stadium = stad;
             context.SaveChanges();
         }
     }
