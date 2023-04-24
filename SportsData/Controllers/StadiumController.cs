@@ -68,6 +68,12 @@ namespace SportsData.Controllers
         public IActionResult Delete(int Id)
         {
             var stadium = context.Stadiums.First(s => s.Id == Id);
+            var stadiumAssigned = context.Teams.FirstOrDefault(t => t.StadiumID == Id);
+            if (stadiumAssigned != null)
+            {
+                ViewBag.message = "Stadium can`t be deleted. It has a home team";
+                return View();
+            }
             context.Stadiums.Remove(stadium);
             context.SaveChanges();
             return RedirectToAction("AllStadiums");

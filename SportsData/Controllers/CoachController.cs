@@ -105,12 +105,15 @@ namespace SportsData.Controllers
 
         public IActionResult Delete(int id)
         {
-
             var coach = context.Coaches.First(s => s.Id == id);
+            if (coach.isHired == true)
+            {
+                ViewBag.message = "Coach can`t be deleted. He has a team.";
+                return View();
+            }
             context.Coaches.Remove(coach);
             context.SaveChanges();
             return RedirectToAction("AllCoaches");
-
         }
 
 

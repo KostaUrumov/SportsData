@@ -90,6 +90,8 @@ namespace SportsData.Controllers
         public IActionResult Delete(int id)
         {
             var findTeam = context.Teams.FirstOrDefault(x => x.Id == id);
+            var coach = context.Coaches.First(c => c.Id == findTeam.CoachID);
+            coach.isHired = false;
             context.Teams.Remove(findTeam);
             context.SaveChanges();
 
