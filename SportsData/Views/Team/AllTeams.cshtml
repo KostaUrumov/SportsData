@@ -5,8 +5,9 @@
 <div class="text-center">
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8CEtlJ-aFL_qjupYF2yqDFHNir2S6xaEOapE971YJg&s") />
 </div>
-
-<a class="table table-hover" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
+<div class="text-center">
+    <a class="col-sm" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
+</div>
 <table class="table">
     <thead>
     <th scope="col">Number</th>
@@ -31,14 +32,14 @@
                 <th scope="col">
                     <form class="mt-2" asp-controller="Team" asp-action="Delete" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
-                            <input type="Submit" value="Delete" class="btn btn-danger mb-2"/>
+                            <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
                         </div>
                     </form>
                 </th>
                 <th scope="col">
-                    <form class="mt-2" asp-controller="Team" asp-action="Edit" method = "get" asp-route-id="@Model[i].Id">
+                    <form class="mt-2" asp-controller="Team" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
-                            <input type="Submit" value="Edit" class="btn btn-danger mb-2"/>
+                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
                         </div>
                     </form>
                 </th>

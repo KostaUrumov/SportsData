@@ -30,7 +30,7 @@ namespace SportsData.Controllers
         public IActionResult CoachIsAlreadyIn()
         {
             ViewBag.Message = "Coach Is already Listed";
-            return View ();
+            return View();
         }
 
         [HttpPost]
@@ -69,8 +69,8 @@ namespace SportsData.Controllers
         {
             var freeCoaches = context.Coaches
                 .Where(c => c.isHired == false)
-                .OrderByDescending(c=>c.FirstName)
-                .ThenByDescending(c=>c.LastName)
+                .OrderByDescending(c => c.FirstName)
+                .ThenByDescending(c => c.LastName)
                 .ToList();
 
             return View(freeCoaches);
@@ -101,6 +101,16 @@ namespace SportsData.Controllers
             findCoach.LastName = model.LastName;
             findCoach.Age = model.Age;
             return RedirectToAction("AllCoaches");
+        }
+
+        public IActionResult Delete(int id)
+        {
+
+            var coach = context.Coaches.First(s => s.Id == id);
+            context.Coaches.Remove(coach);
+            context.SaveChanges();
+            return RedirectToAction("AllCoaches");
+
         }
 
 
