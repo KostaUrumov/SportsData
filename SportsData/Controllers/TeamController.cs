@@ -73,7 +73,7 @@ namespace SportsData.Controllers
                 return RedirectToAction("NoSuchCoach");
             }
 
-            if (stadium.CheckIfStadiumExists(model) == false)
+            if (stadium.StadiumIsIn(model.Stadium) == false)
             {
                 return RedirectToAction("NoSuchStadium");
             }

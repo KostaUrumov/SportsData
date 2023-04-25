@@ -3,15 +3,18 @@ using SportsData.Data;
 using SportsData.Data.Enm;
 using SportsData.Data.Models;
 using SportsData.Models;
+using SportsData.Services;
 
 namespace SportsData.Controllers
 {
     public class StadiumController : Controller
     {
         private SportsDataDbContext context;
-        public StadiumController(SportsDataDbContext _context)
+        private StadiumService stadiumService;
+        public StadiumController(SportsDataDbContext _context, StadiumService _service)
         {
             context = _context;
+            stadiumService = _service;
         }
 
         public IActionResult Index()
@@ -20,7 +23,7 @@ namespace SportsData.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddStadium ()
+        public IActionResult AddStadium()
         {
             return View();
         }
@@ -31,24 +34,14 @@ namespace SportsData.Controllers
             {
                 return RedirectToAction("AddStadium");
             }
-            var coachIsIn = context.Stadiums.FirstOrDefault(s=> s.Name == model.StadiumName);
 
-
-            if (coachIsIn != null)
+            if (stadiumService.StadiumIsIn(model.StadiumName) == true)
             {
 
                 return RedirectToAction("StadiumIsAlreadyIn");
             }
-            else
-            {
-                
-                var stad = new Stadium();
-                stad.Capacity = model.Capacity;
-                stad.Name = model.StadiumName;
-                context.Stadiums.AddRange(stad);          
-            }
-            context.SaveChangesAsync();
-           
+            stadiumService.AddStadium(model);
+
             return RedirectToAction("AllStadiums");
         }
 
@@ -67,15 +60,11 @@ namespace SportsData.Controllers
 
         public IActionResult Delete(int Id)
         {
-            var stadium = context.Stadiums.First(s => s.Id == Id);
-            var stadiumAssigned = context.Teams.FirstOrDefault(t => t.StadiumID == Id);
-            if (stadiumAssigned != null)
+            if (stadiumService.Delete(Id) == false)
             {
                 ViewBag.message = "Stadium can`t be deleted. It has a home team";
                 return View();
             }
-            context.Stadiums.Remove(stadium);
-            context.SaveChanges();
             return RedirectToAction("AllStadiums");
         }
 
@@ -88,14 +77,11 @@ namespace SportsData.Controllers
         [HttpPost]
         public IActionResult Edit(AddStadiumModel model, int Id)
         {
-            var stadFind = context.Stadiums.FirstOrDefault(s => s.Id == Id);
-            if (stadFind == null)
+            
+            if (stadiumService.Edit(model, Id) == false)
             {
                 return RedirectToAction("AllStadiums");
             }
-            stadFind.Name = model.StadiumName;
-            stadFind.Capacity = model.Capacity;
-            context.SaveChanges();
             return RedirectToAction("AllStadiums");
         }
     }
