@@ -105,12 +105,7 @@ namespace SportsData.Controllers
 
         public IActionResult Delete(int id)
         {
-            var findTeam = context.Teams.FirstOrDefault(x => x.Id == id);
-            var coach = context.Coaches.First(c => c.Id == findTeam.CoachID);
-            coach.isHired = false;
-            context.Teams.Remove(findTeam);
-            context.SaveChanges();
-
+            teamService.Delete(id);
             return RedirectToAction("AllTeams");
         }
 
@@ -123,22 +118,9 @@ namespace SportsData.Controllers
         [HttpPost]
         public IActionResult Edit(AddTeamModel model, int id)
         {
-            var teamIsThere = context.Teams.FirstOrDefault(t => t.Id == id);
-            var coh = context.Coaches.FirstOrDefault(c => c.FirstName + " " + c.LastName == model.Coach);
-            var stad = context.Stadiums.First(s => s.Name == model.Stadium);
-
-            teamIsThere.Name = model.Name;
-            teamIsThere.Stadium = stad;
-            teamIsThere.Coach = coh;
-            coach.HireCoach(coh);
-            context.SaveChanges();
+            teamService.Edit(model, id);
             return RedirectToAction("AllTeams");
         }
-
-
-
-
-
 
     }
 }
