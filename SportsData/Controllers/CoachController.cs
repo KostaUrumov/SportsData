@@ -10,11 +10,11 @@ namespace SportsData.Controllers
     public class CoachController : Controller
     {
         private SportsDataDbContext context;
-        private CoachService service;
+        private CoachService coachService;
         public CoachController(SportsDataDbContext _context, CoachService _service)
         {
             context = _context;
-            service = _service;
+            coachService = _service;
         }
         public IActionResult Index()
         {
@@ -42,9 +42,7 @@ namespace SportsData.Controllers
                 return RedirectToAction("NewCoach");
             }
 
-            var coachIsIn = context.Coaches.FirstOrDefault(t => t.FirstName == model.FirtsName && t.LastName == model.LastName && t.Age == model.Age);
-
-            if (coachIsIn != null)
+            if (coachService.CheckCoachIsIn(model) != false)
             {
 
                 return RedirectToAction("CoachIsAlreadyIn");
@@ -52,7 +50,7 @@ namespace SportsData.Controllers
 
             else
             {
-                service.AddModelToDb(model);
+                coachService.AddModelToDb(model);
 
                 return RedirectToAction("AllCoaches");
             }
@@ -96,26 +94,19 @@ namespace SportsData.Controllers
         [HttpPost]
         public IActionResult Edit(AddCoachModel model, int id)
         {
-            var findCoach = context.Coaches.First(x => x.Id == id);
-            findCoach.FirstName = model.FirtsName;
-            findCoach.LastName = model.LastName;
-            findCoach.Age = model.Age;
+            coachService.Edit(model, id);
             return RedirectToAction("AllCoaches");
         }
 
         public IActionResult Delete(int id)
         {
-            var coach = context.Coaches.First(s => s.Id == id);
-            if (coach.isHired == true)
+            if (coachService.Delete(id) == "can`t delete")
             {
                 ViewBag.message = "Coach can`t be deleted. He has a team.";
                 return View();
             }
-            context.Coaches.Remove(coach);
-            context.SaveChanges();
+
             return RedirectToAction("AllCoaches");
         }
-
-
     }
 }
