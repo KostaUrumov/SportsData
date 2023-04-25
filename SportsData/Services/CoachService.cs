@@ -36,6 +36,18 @@ namespace SportsData.Services
             context.SaveChanges();
         }
 
+        public bool CheckCoachIsHired(string name)
+        {
+            var findCoach = context.Coaches.FirstOrDefault(c => c.FirstName + " " + c.LastName == name);
+            if (findCoach.isHired == true || findCoach == null)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
 
     }
 }

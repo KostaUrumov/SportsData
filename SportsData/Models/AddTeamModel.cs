@@ -14,11 +14,11 @@ namespace SportsData.Models
 
         [Required]
         [DisplayName("Треньор ИД")]
-        public int Coach { get; set; }
+        public string Coach { get; set; }
         
         [Required]
         [DisplayName("Стадион ИД")]
-        public int Stadium { get; set; }
+        public string Stadium { get; set; }
 
 
     }

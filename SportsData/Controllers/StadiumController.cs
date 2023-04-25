@@ -98,8 +98,5 @@ namespace SportsData.Controllers
             context.SaveChanges();
             return RedirectToAction("AllStadiums");
         }
-
-
-
     }
 }

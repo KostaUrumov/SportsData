@@ -14,11 +14,13 @@ namespace SportsData.Controllers
         private readonly SportsDataDbContext context;
         private readonly TeamService teamService;
         private readonly CoachService coach;
-        public TeamController(TeamService _teamService, SportsDataDbContext _cont, CoachService _coach)
+        private readonly StadiumService stadium;
+        public TeamController(TeamService _teamService, SportsDataDbContext _cont, CoachService _coach, StadiumService _stadium)
         {
             context = _cont;
             teamService = _teamService;
             coach = _coach;
+            stadium = _stadium;
         }
         public IActionResult Index()
         {
@@ -37,53 +39,67 @@ namespace SportsData.Controllers
             return View();
         }
 
+
+        public IActionResult NoSuchCoach()
+        {
+            ViewBag.Message = "Coach is not available to be assigned";
+            return View();
+        }
+
+        public IActionResult NoSuchStadium()
+        {
+            
+            ViewBag.Message = "Stadium is not available";
+            return View();
+        }
+
+
         [HttpPost]
         public IActionResult AddTeam(AddTeamModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("AddTeam");
             }
 
-            
-            SportName name;
-            bool isGood = Enum.TryParse(model.SportName, out name);
-            if (isGood == false)
+            if (teamService.TypeSportCorrectness(model) == false)
             {
                 return RedirectToAction("AddTeam");
             }
 
-            var teamIsThere = context.Teams.FirstOrDefault(t => t.Name == model.Name && t.SportName == name);
-            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
-
-            if (teamIsThere != null)
+            if (coach.CheckCoachIsHired(model.Coach) == true)
             {
-
-                return RedirectToAction("TeamIsAlreadyIn");
+                return RedirectToAction("NoSuchCoach");
             }
 
-            teamService.AddModelToDb(model);
+            if (stadium.CheckIfStadiumExists(model) == false)
+            {
+                return RedirectToAction("NoSuchStadium");
+            }
+            
 
-            coach.HireCoach(coh);
+            if (teamService.CheckTeamIsAlreadyIn(model) == false)
+            {
+                teamService.AddModelToDb(model);
+            }
 
+            else
+            {
+                return RedirectToAction("TeamIsAlreadyIn");
+            }
 
             return RedirectToAction("AllTeams");
         }
 
         public IActionResult AllTeams()
         {
-            List<Team> list = context.Teams.ToList();
-            if (list == null)
+            if (teamService.AllTeams() == null)
             {
                 RedirectToAction("AddTeam");
             }
-            foreach (var mar in list)
-            {
-                mar.Coach = context.Coaches.FirstOrDefault(c => c.Id == mar.CoachID);
-                mar.Stadium = context.Stadiums.FirstOrDefault(s => s.Id == mar.StadiumID);
-            }
-            return View(list);
-
+            
+            return View(teamService.AllTeams());
         }
 
 
@@ -108,8 +124,8 @@ namespace SportsData.Controllers
         public IActionResult Edit(AddTeamModel model, int id)
         {
             var teamIsThere = context.Teams.FirstOrDefault(t => t.Id == id);
-            var coh = context.Coaches.FirstOrDefault(c => c.Id == model.Coach);
-            var stad = context.Stadiums.First(s => s.Id == model.Stadium);
+            var coh = context.Coaches.FirstOrDefault(c => c.FirstName + " " + c.LastName == model.Coach);
+            var stad = context.Stadiums.First(s => s.Name == model.Stadium);
 
             teamIsThere.Name = model.Name;
             teamIsThere.Stadium = stad;
