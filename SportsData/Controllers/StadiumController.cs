@@ -4,6 +4,7 @@ using SportsData.Data.Enm;
 using SportsData.Data.Models;
 using SportsData.Models;
 using SportsData.Services;
+using System.Collections.Generic;
 
 namespace SportsData.Controllers
 {
@@ -47,7 +48,9 @@ namespace SportsData.Controllers
 
         public IActionResult AllStadiums()
         {
-            List<Stadium> list = context.Stadiums.ToList();
+            List<Stadium> list = context.Stadiums
+                .OrderByDescending(x=>x.Name)
+                .ToList();
 
             return View(list);
         }
@@ -84,5 +87,24 @@ namespace SportsData.Controllers
             }
             return RedirectToAction("AllStadiums");
         }
+
+        public IActionResult OrderByCapacity()
+        {
+            List<Stadium> list = context.Stadiums
+                .OrderByDescending(x=>x.Capacity)
+                .ToList();
+            return View(list);
+        }
+
+        public IActionResult Alphabetically()
+        {
+            List<Stadium> list = context.Stadiums
+               .OrderBy(x => x.Name)
+               .ToList();
+            
+            return View(list);
+        }
+
+       
     }
 }

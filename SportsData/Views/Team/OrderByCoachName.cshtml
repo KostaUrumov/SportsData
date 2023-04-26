@@ -10,21 +10,25 @@
         <a class="nav-link text-success" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
     </div>
 </h2>
+
+<h2>
+    Ordered by Coach Name
+</h2>
 <table class="table table-bordered">
 
     <thead>
-    <th
+    <th>
         <div class="text-center">
             <div class="col-sm">
-                <a class="nav-link text-primary" asp-area="" asp-controller="Team" asp-action="OrderbyStadiumName">Name</a>
+                <a class="nav-link text-primary" asp-area="" asp-controller="Team" asp-action="AllTeamsByName">Name </a>
             </div>
         </div>
     </th>
     <th scope="col">Sport</th>
     <th
-        <div class="text-center">
+        <<div class="text-center">
             <div class="col-sm">
-                <a class="nav-link text-primary" asp-area="" asp-controller="Team" asp-action="OrderbyStadiumName">Stadium</a>
+                <a class="nav-link text-primary" asp-area="" asp-controller="Team" asp-action="OrderbyStadiumName">Name</a>
             </div>
         </div>
     </th>

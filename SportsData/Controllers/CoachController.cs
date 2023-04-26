@@ -108,5 +108,24 @@ namespace SportsData.Controllers
 
             return RedirectToAction("AllCoaches");
         }
+
+        public IActionResult OrderByName()
+        {
+            List<Coach> list = context.Coaches
+                .OrderBy(x=>x.FirstName)
+                .ThenBy(x=>x.LastName)
+                .ToList();
+
+            return View(list);
+        }
+
+        public IActionResult OrderByAge()
+        {
+            List<Coach> list = context.Coaches
+                .OrderBy(x => x.Age)
+                .ToList();
+
+            return View(list);
+        }
     }
 }

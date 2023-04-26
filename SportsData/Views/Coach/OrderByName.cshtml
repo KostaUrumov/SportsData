@@ -6,6 +6,13 @@
     <img src=@Url.Content("https://cdn.iconscout.com/icon/premium/png-256-thumb/football-coach-1653701-1400018.png") />
 </div>
 
+<div class="text-center">
+    <h3>
+        Ordered by Name
+    </h3>
+</div>
+
+
 <h2>
     <table class="table table-bordered">
         <div class="text center">
@@ -36,8 +43,8 @@
             <a class="nav-link text-primary" asp-area="" asp-controller="Coach" asp-action="OrderByName">Name </a>
         </div>
     </th>
-    
-    <th 
+
+    <th
         <div class="text-center">
         <div class="col-sm">
             <a class="nav-link text-primary" asp-area="" asp-controller="Coach" asp-action="OrderByAge">Age </a>
@@ -60,7 +67,7 @@
 
             }
             string name = Model[i].FirstName + " " + Model[i].LastName;
-            <tr>
+        <tr>
             <th scope="col">@name</th>
             <th scope="col">@Model[i].Age</th>
             <th scope="col">@hire</th>

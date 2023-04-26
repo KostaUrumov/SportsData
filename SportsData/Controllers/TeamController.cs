@@ -102,6 +102,19 @@ namespace SportsData.Controllers
             return View(teamService.AllTeams());
         }
 
+        public IActionResult AllTeamsByName()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = list.OrderBy(x => x.Name).ToList();
+
+            foreach (var mar in ordered)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+            return View(ordered);
+        }
+
         public IActionResult Delete(int id)
         {
             teamService.Delete(id);
@@ -133,6 +146,41 @@ namespace SportsData.Controllers
         {
             teamService.ChangeCoach(coach, id);
             return RedirectToAction("AllTeams");
+        }
+
+        public IActionResult OrderByCoachName()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = new List<Team>();
+
+            foreach (var mar in list)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+
+            ordered = list
+                .OrderBy(x => x.Coach.FirstName)
+                .ThenBy(x=>x.Coach.LastName)
+                .ToList();
+            return View(ordered);
+        }
+
+        public IActionResult OrderbyStadiumName()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = new List<Team>();
+
+            foreach (var mar in list)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+
+            ordered = list
+                .OrderBy(x => x.Stadium.Name)
+                .ToList();
+            return View(ordered);
         }
     }
 }
