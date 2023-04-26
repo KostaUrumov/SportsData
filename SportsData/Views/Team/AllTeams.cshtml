@@ -17,6 +17,7 @@
     <th scope="col">Coach</th>
     <th scope="col">Delete</th>
     <th scope="col">Edit</th>
+    <th scope="col">Change Coach</th>
     </thead>
     <thead>
         @for (int i = 0; i < Model.Count(); i++)
@@ -40,6 +41,13 @@
                     <form class="mt-2" asp-controller="Team" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
                             <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form class="mt-2" asp-controller="Team" asp-action="ChangeCoach" method="get" asp-route-id="@Model[i].Id">
+                        <div class="d-grid gap-2">
+                            <input type="Submit" value="ChangeCoach" class="btn btn-danger mb-2" />
                         </div>
                     </form>
                 </th>

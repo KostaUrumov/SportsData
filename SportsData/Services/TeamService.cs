@@ -2,6 +2,8 @@
 using SportsData.Data;
 using SportsData.Models;
 using SportsData.Data.Enm;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SportsData.Services
 {
@@ -101,6 +103,22 @@ namespace SportsData.Services
             teamIsThere.Coach = coh;
             coach.HireCoach(coh);
             context.SaveChanges();
+        }
+
+        
+        public void ChangeCoach(AddCoachModel trainer, int id)
+        {
+            var team = context.Teams.FirstOrDefault(x => x.Id == id);
+            var coa = context.Coaches.First(c => c.Id == team.CoachID);
+            coach.Fire(coa);
+            var newCoach = context.Coaches.First(c => c.FirstName == trainer.FirtsName && c.LastName == trainer.LastName);
+            if (coach.CheckCoachIsHired(newCoach.FirstName+" "+newCoach.LastName) == false)
+            {
+                team.Coach = newCoach;
+                coach.HireCoach(newCoach);
+            }
+            context.SaveChanges();
+            
         }
 
     }

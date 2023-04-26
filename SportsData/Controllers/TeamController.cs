@@ -33,6 +33,45 @@ namespace SportsData.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult AddTeam(AddTeamModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("AddTeam");
+            }
+
+            if (teamService.TypeSportCorrectness(model) == false)
+            {
+                return RedirectToAction("AddTeam");
+            }
+
+            if (coach.CheckCoachIsHired(model.Coach) == true)
+            {
+                return RedirectToAction("NoSuchCoach");
+            }
+
+            if (stadium.StadiumIsIn(model.Stadium) == false)
+            {
+                return RedirectToAction("NoSuchStadium");
+            }
+
+
+            if (teamService.CheckTeamIsAlreadyIn(model) == false)
+            {
+                teamService.AddModelToDb(model);
+            }
+
+            else
+            {
+                return RedirectToAction("TeamIsAlreadyIn");
+            }
+
+            return RedirectToAction("AllTeams");
+        }
+
+
         public IActionResult TeamIsAlreadyIn()
         {
             ViewBag.Message = "Team Is already listed";
@@ -54,44 +93,7 @@ namespace SportsData.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult AddTeam(AddTeamModel model)
-        {
-            
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("AddTeam");
-            }
-
-            if (teamService.TypeSportCorrectness(model) == false)
-            {
-                return RedirectToAction("AddTeam");
-            }
-
-            if (coach.CheckCoachIsHired(model.Coach) == true)
-            {
-                return RedirectToAction("NoSuchCoach");
-            }
-
-            if (stadium.StadiumIsIn(model.Stadium) == false)
-            {
-                return RedirectToAction("NoSuchStadium");
-            }
-            
-
-            if (teamService.CheckTeamIsAlreadyIn(model) == false)
-            {
-                teamService.AddModelToDb(model);
-            }
-
-            else
-            {
-                return RedirectToAction("TeamIsAlreadyIn");
-            }
-
-            return RedirectToAction("AllTeams");
-        }
-
+        
         public IActionResult AllTeams()
         {
             if (teamService.AllTeams() == null)
@@ -122,5 +124,18 @@ namespace SportsData.Controllers
             return RedirectToAction("AllTeams");
         }
 
+        [HttpGet]
+        public IActionResult ChangeCoach()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangeCoach(AddCoachModel coach, int id)
+        {
+            teamService.ChangeCoach(coach, id);
+            return RedirectToAction("AllTeams");
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@using SportsData.Data.Models
+@model AddCoachModel
+
+@{
+    ViewBag.Title = "Add a new coach to the team";
+}
+
+<form asp-controller="Team" asp-action="ChangeCoach" method="post">
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="FirtsName"></label>
+            <input asp-for="FirtsName" class="form-control" />
+            <span asp-validation-for="FirtsName" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="submit" class="btn btn-success mt-2">Submit</button>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
