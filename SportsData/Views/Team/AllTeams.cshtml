@@ -5,12 +5,14 @@
 <div class="text-center">
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8CEtlJ-aFL_qjupYF2yqDFHNir2S6xaEOapE971YJg&s") />
 </div>
-<div class="text-center">
-    <a class="col-sm" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
-</div>
-<table class="table">
+<h2>
+    <div class="text-center">
+        <a class="nav-link text-success" asp-area="" asp-controller="Team" asp-action="AddTeam">Add new Team</a>
+    </div>
+</h2>
+<table class="table table-bordered">
+
     <thead>
-    <th scope="col">Number</th>
     <th scope="col">Team Name</th>
     <th scope="col">Sport</th>
     <th scope="col">Stadium</th>
@@ -25,7 +27,6 @@
             int line = i + 1;
             string coachName = @Model[i].Coach.FirstName + " " + @Model[i].Coach.LastName;
             <tr class="table">
-                <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].SportName</th>
                 <th scope="col">@Model[i].Stadium.Name</th>
@@ -40,14 +41,14 @@
                 <th scope="col">
                     <form class="mt-2" asp-controller="Team" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
-                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
+                            <input type="Submit" value="Edit" class="btn btn-success mb-2" />
                         </div>
                     </form>
                 </th>
                 <th scope="col">
                     <form class="mt-2" asp-controller="Team" asp-action="ChangeCoach" method="get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
-                            <input type="Submit" value="ChangeCoach" class="btn btn-danger mb-2" />
+                            <input type="Submit" value="ChangeCoach" class="btn btn-warning mb-2" />
                         </div>
                     </form>
                 </th>

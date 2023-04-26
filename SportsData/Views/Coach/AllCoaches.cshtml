@@ -6,26 +6,39 @@
     <img src=@Url.Content("https://cdn.iconscout.com/icon/premium/png-256-thumb/football-coach-1653701-1400018.png") />
 </div>
 
-<div class="text center">
-    <div class="row">
-        <div class="col-sm">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="NewCoach">Add new Coach</a>
+<h2>
+    <table class="table table-bordered">
+        <div class="text center">
+            <div class="row">
+                <div class="col-sm">
+                    <a class="nav-link text-warning" asp-area="" asp-controller="Coach" asp-action="NewCoach">Add new Coach</a>
+                </div>
+                <div class="col-sm">
+                    <a class="nav-link text-info" asp-area="" asp-controller="Coach" asp-action="CoachesWIthoutTeam">Free Coaches</a>
+                </div>
+                <div class="col-sm">
+                    <a class="nav-link text-danger" asp-area="" asp-controller="Coach" asp-action="HiredCoaches">Hired Coaches</a>
+                </div>
+            </div>
         </div>
-        <div class="col-sm">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="CoachesWIthoutTeam">Free Coaches</a>
-        </div>
-        <div class="col-sm">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="HiredCoaches">Hired Coaches</a>
-        </div>
-    </div>
-</div>
+    </table>
+
+</h2>
 
 
-<table class="table">
+
+<table class="table table-bordered">
     <thead>
+    <thead>
+    <th scope="col">FirstName</th>
+    <th scope="col">LastName</th>
+    <th scope="col">Age</th>
+    <th scope="col">Is Hired</th>
+    <th scope="col">Delete</th>
+    <th scope="col">Edit</th>
+    </thead>
         @for (int i = 0; i < Model.Count(); i++)
         {
-            int line = i + 1;
             string hire = "";
             if (@Model[i].isHired == false)
             {
@@ -34,30 +47,28 @@
             else
             {
                 hire += "Yes";
-                
-            }
-            <tr>
-                <th scope="col">#@line</th>
-                <th scope="col">@Model[i].FirstName</th>
-                <th scope="col">@Model[i].LastName</th>
-                <th scope="col">@Model[i].Age</th>
-                <th scope="col">@hire</th>
-                <th scope="col">
-                    <form class="mt-2" asp-controller="Coach" asp-action="Delete" asp-route-id="@Model[i].Id">
-                        <div class="d-grid gap-2">
-                            <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
-                        </div>
-                    </form>
-                </th>
-                <th scope="col">
-                    <form class="mt-2" asp-controller="Coach" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
-                        <div class="d-grid gap-2">
-                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
-                        </div>
-                    </form>
-                </th>
 
-            </tr>
+            }
+        <tr>
+            <th scope="col">@Model[i].FirstName</th>
+            <th scope="col">@Model[i].LastName</th>
+            <th scope="col">@Model[i].Age</th>
+            <th scope="col">@hire</th>
+            <th scope="col">
+                <form class="mt-2" asp-controller="Coach" asp-action="Delete" asp-route-id="@Model[i].Id">
+                    <div class="d-grid gap-2">
+                        <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
+                    </div>
+                </form>
+            </th>
+            <th scope="col">
+                <form class="mt-2" asp-controller="Coach" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
+                    <div class="d-grid gap-2">
+                        <input type="Submit" value="Edit" class="btn btn-success mb-2" />
+                    </div>
+                </form>
+            </th>
+        </tr>
         }
     </thead>
 

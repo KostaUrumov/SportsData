@@ -5,21 +5,27 @@
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbZuhj1_ZIJ5Yw51AEf8_3IcFMYyhfsnI5fJMQXldMg&s") />
 </div>
 
-
-<div class="row">
-    <div class="col-sm">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium </a>
+<h2>
+    <div class="text-center">
+        <div class="col-sm">
+            <a class="nav-link text-primary" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium </a>
+        </div>
     </div>
-</div>
 
+</h2>
 
-<table class="table">
+<table class="table table-bordered">
+    <thead>
+    <th scope="col">Name</th>
+    <th scope="col">Capacity</th>
+    <th scope="col">Delete</th>
+    <th scope="col">Edit</th>
+    </thead>
     <thead>
         @for (int i = 0; i < Model.Count(); i++)
         {
             int line = i + 1;
             <tr>
-                <th scope="col">#@line</th>
                 <th scope="col">@Model[i].Name</th>
                 <th scope="col">@Model[i].Capacity</th>
                 <th scope="col">
@@ -32,7 +38,7 @@
                 <th scope="col">
                     <form class="mt-2" asp-controller="Stadium" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
                         <div class="d-grid gap-2">
-                            <input type="Submit" value="Edit" class="btn btn-danger mb-2" />
+                            <input type="Submit" value="Edit" class="btn btn-success mb-2" />
                         </div>
                     </form>
                 </th>

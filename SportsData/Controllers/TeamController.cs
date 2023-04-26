@@ -91,8 +91,6 @@ namespace SportsData.Controllers
             ViewBag.Message = "Stadium is not available";
             return View();
         }
-
-
         
         public IActionResult AllTeams()
         {
@@ -103,7 +101,6 @@ namespace SportsData.Controllers
             
             return View(teamService.AllTeams());
         }
-
 
         public IActionResult Delete(int id)
         {

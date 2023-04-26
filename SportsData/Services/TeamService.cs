@@ -104,7 +104,6 @@ namespace SportsData.Services
             coach.HireCoach(coh);
             context.SaveChanges();
         }
-
         
         public void ChangeCoach(AddCoachModel trainer, int id)
         {
@@ -120,6 +119,5 @@ namespace SportsData.Services
             context.SaveChanges();
             
         }
-
     }
 }
