@@ -105,6 +105,26 @@ namespace SportsData.Controllers
             return View(list);
         }
 
-       
+        public IActionResult Alphabeticallyv2()
+        {
+            List<Stadium> list = context.Stadiums
+               .OrderByDescending(x => x.Name)
+               .ToList();
+
+            return View(list);
+
+        }
+
+        public IActionResult OrderByCapacityv2()
+        {
+            List<Stadium> list = context.Stadiums
+                .OrderBy(x => x.Capacity)
+                .ToList();
+            return View(list);
+
+        }
+
+
+
     }
 }

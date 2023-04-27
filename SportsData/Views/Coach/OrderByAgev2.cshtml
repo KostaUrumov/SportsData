@@ -46,7 +46,7 @@
     <th
         <div class="text-center">
         <div class="col-sm">
-            <a class="nav-link text-primary" asp-area="" asp-controller="Coach" asp-action="OrderByAgev2">Age </a>
+            <a class="nav-link text-primary" asp-area="" asp-controller="Coach" asp-action="OrderByAge">Age </a>
         </div>
     </th>
     <th scope="col">Is Hired</th>
@@ -66,25 +66,25 @@
 
             }
             string name = Model[i].FirstName + " " + Model[i].LastName;
-            <tr>
-                <th scope="col">@name</th>
-                <th scope="col">@Model[i].Age</th>
-                <th scope="col">@hire</th>
-                <th scope="col">
-                    <form class="mt-2" asp-controller="Coach" asp-action="Delete" asp-route-id="@Model[i].Id">
-                        <div class="d-grid gap-2">
-                            <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
-                        </div>
-                    </form>
-                </th>
-                <th scope="col">
-                    <form class="mt-2" asp-controller="Coach" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
-                        <div class="d-grid gap-2">
-                            <input type="Submit" value="Edit" class="btn btn-success mb-2" />
-                        </div>
-                    </form>
-                </th>
-            </tr>
+        <tr>
+            <th scope="col">@name</th>
+            <th scope="col">@Model[i].Age</th>
+            <th scope="col">@hire</th>
+            <th scope="col">
+                <form class="mt-2" asp-controller="Coach" asp-action="Delete" asp-route-id="@Model[i].Id">
+                    <div class="d-grid gap-2">
+                        <input type="Submit" value="Delete" class="btn btn-danger mb-2" />
+                    </div>
+                </form>
+            </th>
+            <th scope="col">
+                <form class="mt-2" asp-controller="Coach" asp-action="Edit" method="get" asp-route-id="@Model[i].Id">
+                    <div class="d-grid gap-2">
+                        <input type="Submit" value="Edit" class="btn btn-success mb-2" />
+                    </div>
+                </form>
+            </th>
+        </tr>
         }
     </thead>
 

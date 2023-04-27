@@ -1,14 +1,13 @@
 ﻿@using SportsData.Data.Models;
 @model List<Stadium>
 
+
 <div class="text-center">
     <img src=@Url.Content("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbZuhj1_ZIJ5Yw51AEf8_3IcFMYyhfsnI5fJMQXldMg&s") />
 </div>
-
-
 <div class="text-center">
     <h2>
-        Oreded by name
+        Oreded by capacity
     </h2>
 </div>
 
@@ -18,16 +17,15 @@
             <a class="nav-link text-primary" asp-area="" asp-controller="Stadium" asp-action="AddStadium">Add new Stadium </a>
         </div>
     </div>
+
 </h2>
-
-
 
 <table class="table table-bordered">
     <thead>
     <th
         <div class="text-center">
         <div class="col-sm">
-            <a class="nav-link text-primary" asp-area="" asp-controller="Stadium" asp-action="Alphabeticallyv2">Name </a>
+            <a class="nav-link text-primary" asp-area="" asp-controller="Stadium" asp-action="Alphabetically">Name </a>
         </div>
     </th>
     <th
@@ -65,3 +63,4 @@
         }
     </thead>
 </table>
+

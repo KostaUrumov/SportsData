@@ -118,11 +118,30 @@ namespace SportsData.Controllers
 
             return View(list);
         }
+        public IActionResult OrderByNamev2()
+        {
+            List<Coach> list = context.Coaches
+                .OrderByDescending(x => x.FirstName)
+                .ThenBy(x => x.LastName)
+                .ToList();
+
+            return View(list);
+        }
+
 
         public IActionResult OrderByAge()
         {
             List<Coach> list = context.Coaches
                 .OrderBy(x => x.Age)
+                .ToList();
+
+            return View(list);
+        }
+
+        public IActionResult OrderByAgev2()
+        {
+            List<Coach> list = context.Coaches
+                .OrderByDescending(x => x.Age)
                 .ToList();
 
             return View(list);
