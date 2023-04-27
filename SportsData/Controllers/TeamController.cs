@@ -115,6 +115,19 @@ namespace SportsData.Controllers
             return View(ordered);
         }
 
+        public IActionResult AllTeamsByNamev2()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = list.OrderByDescending(x => x.Name).ToList();
+
+            foreach (var mar in ordered)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+            return View(ordered);
+        }
+
         public IActionResult Delete(int id)
         {
             teamService.Delete(id);
@@ -166,6 +179,25 @@ namespace SportsData.Controllers
             return View(ordered);
         }
 
+
+        public IActionResult OrderByCoachNamev2()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = new List<Team>();
+
+            foreach (var mar in list)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+
+            ordered = list
+                .OrderByDescending(x => x.Coach.FirstName)
+                .ThenByDescending(x => x.Coach.LastName)
+                .ToList();
+            return View(ordered);
+        }
+
         public IActionResult OrderbyStadiumName()
         {
             List<Team> list = context.Teams.ToList();
@@ -179,6 +211,23 @@ namespace SportsData.Controllers
 
             ordered = list
                 .OrderBy(x => x.Stadium.Name)
+                .ToList();
+            return View(ordered);
+        }
+
+        public IActionResult OrderbyStadiumNamev2()
+        {
+            List<Team> list = context.Teams.ToList();
+            var ordered = new List<Team>();
+
+            foreach (var mar in list)
+            {
+                mar.Coach = context.Coaches.First(c => c.Id == mar.CoachID);
+                mar.Stadium = context.Stadiums.First(s => s.Id == mar.StadiumID);
+            }
+
+            ordered = list
+                .OrderByDescending(x => x.Stadium.Name)
                 .ToList();
             return View(ordered);
         }
